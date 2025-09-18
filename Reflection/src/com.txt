@@ -1,0 +1,4 @@
+name=白小纯
+gender=男
+age=20
+address=通天大陆
