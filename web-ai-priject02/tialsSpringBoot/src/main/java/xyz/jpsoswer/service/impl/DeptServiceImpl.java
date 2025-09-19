@@ -13,6 +13,13 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
     @Autowired
     private deptMapper deptmapper;
+
+    @Override
+    public void deleteById(Integer id) {
+        deptmapper.deleteById(id);
+    }
+
+    //调用查询部门信息的接口
     @Override
     public List<Dept> findAll() {
         return deptmapper.findAll();
