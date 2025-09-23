@@ -1,9 +1,6 @@
 package likou06;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class likoutest2841 {
     public static void main(String[] args) {
@@ -21,26 +18,34 @@ public class likoutest2841 {
         System.out.println(l);
 
     }
-
+    //cnt.merge(a[i], 1, Integer::sum);
     public static long maxSum(List<Integer> nums, int m, int k) {
-
+        Integer[] a = nums.toArray(new Integer[nums.size()]);
         long count = 0;
         long ans = 0;
-        HashSet<Integer> hs = new HashSet<>();
+        Map<Integer,Integer> mp = new HashMap<>();
         for (int i = 0; i < nums.size(); i++) {
-            count+=nums.get(i);
-            hs.add(nums.get(i));
+
+            count+=a[i];
+            mp.merge(a[i],1,Integer::sum);
             int left = i-k+1;
             if(left<0)
             {
                 continue;
             }
-            if(hs.size()>=m)
+            if(mp.size()>=m)
             {
                 ans = Math.max(ans,count);
             }
-            count -= nums.get(left);
-            hs.remove(nums.get(left));
+            Integer c = a[left];
+            count -= c;
+            if(mp.get(c)>1)
+            {
+                mp.put(c,mp.get(c)-1);
+            }
+            else {
+                mp.remove(c);
+            }
         }
         return ans;
     }
