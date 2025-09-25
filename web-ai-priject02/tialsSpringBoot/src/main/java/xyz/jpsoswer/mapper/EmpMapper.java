@@ -1,8 +1,6 @@
 package xyz.jpsoswer.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import xyz.jpsoswer.pojo.Emp;
 import xyz.jpsoswer.pojo.EmpQueryParam;
 
@@ -20,4 +18,8 @@ public interface EmpMapper {
     //分页查询2
     public List<Emp> list(EmpQueryParam empQueryParam);
 
+    @Options(useGeneratedKeys = true,keyProperty = "id") //获取到生成的主键 -- 主键返回
+    @Insert("insert into emp(username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time)  " +
+            "values (#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
+    void insert(Emp emp);
 }
