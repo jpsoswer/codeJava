@@ -14,3 +14,8 @@ spring:
     password: jss0219
 
 #连接数据库所需要的配置
+
+#配置事务管理日志级别
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
