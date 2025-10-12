@@ -13,6 +13,14 @@ spring:
     username: root
     password: jss0219
 
+  #设置文件的传输限制
+  servlet:
+    multipart:
+      #单次传输文件大小
+      max-file-size: 10MB
+      #单次请求传输大小
+      max-request-size: 100MB
+
 #连接数据库所需要的配置
 
 #配置事务管理日志级别

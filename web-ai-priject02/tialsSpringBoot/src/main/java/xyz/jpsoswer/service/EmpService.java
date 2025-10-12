@@ -6,6 +6,7 @@ import xyz.jpsoswer.pojo.EmpQueryParam;
 import xyz.jpsoswer.pojo.PageResult;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface EmpService {
 
@@ -17,4 +18,12 @@ public interface EmpService {
 
     //新增员工信息
     void save(Emp emp);
+
+    //删除员工信息
+    void delete(List<Integer> ids);
+
+    Emp getInfo(Integer id);
+
+    //修改员工信息
+    void update(Emp emp);
 }
