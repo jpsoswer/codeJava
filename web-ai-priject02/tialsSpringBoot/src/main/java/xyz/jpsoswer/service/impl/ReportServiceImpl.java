@@ -6,6 +6,7 @@ import xyz.jpsoswer.mapper.EmpMapper;
 import xyz.jpsoswer.pojo.JobOption;
 import xyz.jpsoswer.service.ReportService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,5 +25,10 @@ public class ReportServiceImpl implements ReportService {
         List<Object> jobList = list.stream().map(dataMap -> dataMap.get("pos")).collect(Collectors.toList());
         List<Object> dataList = list.stream().map(dataMap -> dataMap.get("num")).collect(Collectors.toList());
         return new JobOption(jobList,dataList);
+    }
+
+    @Override
+    public List<Map<String, Object>> getEmpGenderData() {
+        return empMapper.countEmpGenderData();
     }
 }
