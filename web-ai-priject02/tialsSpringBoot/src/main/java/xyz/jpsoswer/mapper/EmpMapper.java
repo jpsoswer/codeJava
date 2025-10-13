@@ -6,6 +6,7 @@ import xyz.jpsoswer.pojo.EmpQueryParam;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -29,4 +30,8 @@ public interface EmpMapper {
     Emp getInfo(Integer id);
 
     void updateById(Emp emp);
+
+    //统计员工职位人数
+    @MapKey("pos")
+    List<Map<String,Object>> countEmpJobData();
 }
