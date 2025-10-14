@@ -36,10 +36,8 @@
             <if test="deptId != null">
                 dept_id = #{deptId},
             </if>
-            <!-- update_time 通常每次更新都应刷新，可选择是否动态 -->
-            <if test="updateTime != null">
-                update_time = #{updateTime}
-            </if>
+            <!-- 确保update_time总是被设置 -->
+            update_time = #{updateTime}
         </set>
         where id = #{id}
     </update>

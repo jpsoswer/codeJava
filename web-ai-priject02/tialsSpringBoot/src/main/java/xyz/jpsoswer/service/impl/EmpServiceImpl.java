@@ -2,6 +2,7 @@ package xyz.jpsoswer.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +12,13 @@ import xyz.jpsoswer.mapper.EmpMapper;
 import xyz.jpsoswer.pojo.*;
 import xyz.jpsoswer.service.EmpLogService;
 import xyz.jpsoswer.service.EmpService;
+import xyz.jpsoswer.utils.JwtUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
+@Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
     @Autowired
@@ -85,6 +86,7 @@ public class EmpServiceImpl implements EmpService {
         }
     }
 
+
     @Transactional(rollbackFor = {Exception.class})
     @Override
     public void delete(List<Integer> ids) {
@@ -111,9 +113,36 @@ public class EmpServiceImpl implements EmpService {
         empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
         //再添加这个员工的工作经历
         List<EmpExpr> exprList = emp.getExprList();
-        if(CollectionUtils.isEmpty(exprList)){
+        if(!CollectionUtils.isEmpty(exprList)){
             exprList.forEach(empExpr -> empExpr.setEmpId(emp.getId()));
             empExprMapper.insertBatch(exprList);
         }
     }
+
+
+
+
+    //登陆操作
+    @Override
+    public LoginInfo login(Emp emp) {
+        //调用mapper接口，根据用户名和密码查询员工信息
+        Emp e = empMapper.selectByUsernameAndPassword(emp);
+
+        //判断：是否存在这个员工，如果存在，组装登陆成功信息
+        if(e!= null)
+        {
+            log.info("登陆成功，员工信息:{}",e);
+            //创建存储员工登录信息集合
+            Map<String,Object> claims = new HashMap<>();
+            claims.put("id",e.getId());
+            claims.put("username",e.getUsername());
+            //获取员工的登录令牌
+            String jwt = JwtUtils.generateJwt(claims);
+            return new LoginInfo(e.getId(),e.getUsername(),e.getName(),jwt);
+        }
+
+        //不存在,返回null
+        return null;
+    }
+
 }

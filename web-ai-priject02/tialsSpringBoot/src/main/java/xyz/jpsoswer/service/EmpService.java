@@ -3,6 +3,7 @@ package xyz.jpsoswer.service;
 import org.springframework.format.annotation.DateTimeFormat;
 import xyz.jpsoswer.pojo.Emp;
 import xyz.jpsoswer.pojo.EmpQueryParam;
+import xyz.jpsoswer.pojo.LoginInfo;
 import xyz.jpsoswer.pojo.PageResult;
 
 import java.time.LocalDate;
@@ -26,4 +27,7 @@ public interface EmpService {
 
     //修改员工信息
     void update(Emp emp);
+
+    //登录
+    LoginInfo login(Emp emp);
 }
