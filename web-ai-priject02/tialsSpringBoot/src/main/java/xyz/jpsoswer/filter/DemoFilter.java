@@ -6,7 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*")
+//@WebFilter(urlPatterns = "/*")
 @Slf4j
 public class DemoFilter implements Filter {
     //初始化服务，只在初始化Web服务器时执行
