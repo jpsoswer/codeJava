@@ -54,6 +54,13 @@
             <version>0.9.1</version>
         </dependency>
 
+        <!-- AOP依赖面向切面编程-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>3.2.8</version>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
