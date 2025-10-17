@@ -2,6 +2,7 @@ package xyz.jpsoswer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import xyz.jpsoswer.anno.Log;
 import xyz.jpsoswer.pojo.Dept;
 import xyz.jpsoswer.pojo.Result;
 import xyz.jpsoswer.service.DeptService;
@@ -36,6 +37,7 @@ public class DeptContrpller {
 //    }
 
     //删除部门2
+    @Log
     @DeleteMapping
     public Result delete(Integer id)
     {
@@ -55,6 +57,7 @@ public class DeptContrpller {
     /*
     新增部门
      */
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept)
     {
@@ -87,6 +90,7 @@ public class DeptContrpller {
     /*
     修改数据
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept)
     {

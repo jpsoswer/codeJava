@@ -1,6 +1,8 @@
 package xyz.jpsoswer.filter;
 
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import xyz.jpsoswer.utils.CurrentHolder;
 import xyz.jpsoswer.utils.JwtUtils;
 
 import javax.servlet.*;
@@ -36,7 +38,10 @@ public class TokenFilter implements Filter {
         }
         //5.如果token存在，校验令牌，如果校验失败->返回错误信息(响应401状态码)
         try {
-            JwtUtils.parseJWT(token);
+            Claims claims = JwtUtils.parseJWT(token);
+            Integer empId = Integer.valueOf(claims.get("id").toString());
+            CurrentHolder.setCurrentId(empId);
+            log.info("当前登陆员工ID:{},将其存入ThreadLocal",empId);
         } catch (Exception e) {
             log.info("令牌非法，响应401");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -45,5 +50,8 @@ public class TokenFilter implements Filter {
         }
         //6.校验通过，放行
         filterChain.doFilter(request,response);
+
+        //用完之后删除
+        CurrentHolder.remove();
     }
 }
