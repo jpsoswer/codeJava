@@ -41,4 +41,12 @@ public interface EmpMapper {
     //登陆操作,在数据库中查询数据
     @Select("select id,username,name from emp where username=#{username} and password = #{password}")
     Emp selectByUsernameAndPassword(Emp emp);
+
+    //统计各学历人数
+    @MapKey("name")
+    List<Map<String, Object>> getStudentCount();
+
+    //统计班级人数
+    @MapKey("name")
+    List<Map<String, Object>> getStudentData();
 }

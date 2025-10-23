@@ -1,5 +1,6 @@
 package xyz.jpsoswer.service;
 
+import xyz.jpsoswer.pojo.ClazzCountOption;
 import xyz.jpsoswer.pojo.JobOption;
 
 import java.util.List;
@@ -11,4 +12,11 @@ public interface ReportService {
     JobOption getEmpJobData();
     //统计员工性别人数
     List<Map<String, Object>> getEmpGenderData();
+
+    //统计学历人数信息
+    List<Map<String, Object>> getStudentCount();
+
+    //统计班级人数
+    ClazzCountOption getStudentData();
+
 }

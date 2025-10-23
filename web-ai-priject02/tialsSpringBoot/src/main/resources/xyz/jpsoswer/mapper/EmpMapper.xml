@@ -124,4 +124,34 @@
                count(*) value
         from emp group by gender;
     </select>
+
+    <!--统计各员工学历人人数信息-->
+    <select id="getStudentCount" resultType="java.util.Map">
+        select
+            (case student.degree when 1 then '初中'
+                                 when 2 then '高中'
+                                 when 3 then '大专'
+                                 when 4 then '本科'
+                                 when 5 then '硕士'
+                                 when 6 then '博士'
+                                 else '其他' end) name,
+            count(*) value
+        from student group by degree order by value
+    </select>
+
+    <!--统计班级人数-->
+    <select id="getStudentData" resultType="java.util.Map">
+        select
+            (case student.clazz_id when 1 then 'JavaEE就业163期'
+                                   when 4 then '前端就业90期'
+                                   when 5 then 'JavaEE就业165期'
+                                   when 6 then 'JavaEE就业166期'
+                                   when 7 then '大数据就业58期'
+                                   when 8 then 'JavaEE就业167期'
+                                   when 13 then '云计算运维'
+                                   else '其他' end ) name,
+            count(*) value
+        from student group by clazz_id order by value
+    </select>
+
 </mapper>
